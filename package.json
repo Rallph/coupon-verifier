@@ -1,0 +1,22 @@
+{
+  "name": "coupon-verifier",
+  "version": "1.0.0",
+  "description": "A site for waiters to verify coupon codes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc -p ."
+  },
+  "author": "Ralph Nahra",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.9",
+    "nodemon": "^2.0.6",
+    "typescript": "^4.0.5"
+  }
+}
