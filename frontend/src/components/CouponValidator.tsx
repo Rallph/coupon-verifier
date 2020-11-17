@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+
+import CouponValidationMessage from './CouponValidationMessage';
 
 type CouponValidatorState = {
     couponCode: string;
@@ -37,7 +40,7 @@ class CouponValidator extends Component<{}, CouponValidatorState> {
                         const code = target.code.value;
                         this.validateCode(code);
                     }}>
-                        <Form.Row className="mx-auto">
+                        <Form.Row>
                             <Col xs={{ span: 3, offset: 4 }}>
                                 <Form.Control name="code" type="text" placeholder="Enter coupon code"/>
                             </Col>
@@ -45,8 +48,13 @@ class CouponValidator extends Component<{}, CouponValidatorState> {
                                 <Button variant="primary" type="submit">Validate</Button>
                             </Col>
                         </Form.Row>
-                         
                     </Form>
+
+                    <Row className="mt-3">
+                        <Col>
+                            <CouponValidationMessage couponCode={this.state.couponCode} valid={this.state.valid} />
+                        </Col>
+                    </Row>
                 </Container>
             </div>
         );
