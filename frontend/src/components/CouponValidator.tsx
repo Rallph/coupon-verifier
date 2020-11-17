@@ -23,7 +23,8 @@ class CouponValidator extends Component<{}, CouponValidatorState> {
 
         fetch(`/coupon/validate?code=${couponCode}`)
         .then(res => res.json())
-        .then(validationResponse => this.setState(validationResponse));
+        .then(validationResponse => this.setState(validationResponse))
+        .catch(error => console.error);
 
     }
 
