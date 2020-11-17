@@ -4,7 +4,17 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-class CouponValidator extends Component {
+type CouponValidatorState = {
+    couponCode: string;
+    valid: boolean | undefined;
+}
+
+class CouponValidator extends Component<{}, CouponValidatorState> {
+
+    state: CouponValidatorState = {
+        couponCode: "",
+        valid: undefined
+    };
 
     render() {
 
@@ -14,7 +24,7 @@ class CouponValidator extends Component {
                     <Form>
                         <Form.Row className="mx-auto">
                             <Col xs={{ span: 3, offset: 4 }}>
-                                <Form.Control type="text" placeholder="Enter coupon code"/>
+                                <Form.Control type="text" placeholder="Enter coupon code" onChange={(event) => { this.setState({ couponCode: event.currentTarget.value }) }}/>
                             </Col>
                             <Col xs={1}>
                                 <Button variant="primary" type="submit">Validate</Button>
