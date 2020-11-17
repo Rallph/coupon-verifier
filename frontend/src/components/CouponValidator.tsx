@@ -15,16 +15,13 @@ class CouponValidator extends Component<{}, CouponValidatorState> {
         couponCode: "",
         valid: undefined
     };
-    
-    private formRef = React.createRef<HTMLInputElement>();
 
-    validateCode = (event: React.SyntheticEvent) => {
+    validateCode = (couponCode: string) => {
 
-        fetch(`/coupon/validate?code=${this.state.couponCode}`)
+        fetch(`/coupon/validate?code=${couponCode}`)
         .then(res => res.json())
         .then(validationResponse => this.setState(validationResponse));
 
-        event.preventDefault();
     }
 
     render() {
@@ -32,10 +29,17 @@ class CouponValidator extends Component<{}, CouponValidatorState> {
         return(
             <div>
                 <Container>
-                    <Form onSubmit={this.validateCode}>
+                    <Form onSubmit={(event: React.SyntheticEvent) => {
+                        event.preventDefault();
+                        const target = event.target as typeof event.target & {
+                            code: { value: string}
+                        };
+                        const code = target.code.value;
+                        this.validateCode(code);
+                    }}>
                         <Form.Row className="mx-auto">
                             <Col xs={{ span: 3, offset: 4 }}>
-                                <Form.Control ref={this.formRef} type="text" placeholder="Enter coupon code" onChange={(event) => { this.setState({ couponCode: event.currentTarget.value }) }}/>
+                                <Form.Control name="code" type="text" placeholder="Enter coupon code"/>
                             </Col>
                             <Col xs={1}>
                                 <Button variant="primary" type="submit">Validate</Button>
